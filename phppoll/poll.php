@@ -42,7 +42,7 @@
         
         if($completed) {
             // Get all answers
-            $answersQuery = $db->prepared("
+            $answersQuery = $db->prepare("
                 SELECT 
                 polls_choices.name,
                 COUNT(polls_answers.id) * 100 / (
@@ -112,10 +112,11 @@
                 <?php if($completed): ?>
                     <p>You have completed this poll. Thanks.</p>
                     
+                <ul>
                     <?php foreach($answers as $answer): ?>
-                        <?php print_r($answer); ?>
+                        <li><?php echo $answer->name; ?> (<?php echo number_format($answer->percentage, 2); ?>%)</li>
                     <?php endforeach; ?>
-                    
+                </ul>
                 <?php else: ?>
                     <?php if(!empty($choices)): ?>
                         <form action="vote.php" method="post">

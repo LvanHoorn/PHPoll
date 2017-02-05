@@ -36,6 +36,7 @@
         ]);
         
         header('Location: poll.php?poll=' . $poll);
+        exit();
     }   
     
     header('Location: index.php');
